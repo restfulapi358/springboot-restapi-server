@@ -9,7 +9,7 @@ import com.restapi.config.ServiceParametersConfig;
 
 import java.io.IOException;
 
-@Component
+
 public class ApiTokenFilter implements Filter {
 
     private final ServiceParametersConfig serviceParametersConfig;

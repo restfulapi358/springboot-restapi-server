@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.restapi.config.ServiceParametersConfig;
 
 @SpringBootApplication
-@EnableScheduling
 public class SpringbootRestapiServerApplication implements CommandLineRunner{
 
 	
