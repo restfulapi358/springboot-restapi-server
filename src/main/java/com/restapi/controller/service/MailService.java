@@ -24,12 +24,12 @@ public class MailService {
     @Autowired
     private TemplateEngine templateEngine;
 
-    public void sendSimpleEmail(String toEmail, String subject, String body) {
+    public void sendSimpleEmail(String toEmail, String subject, String text) {
     	
         SimpleMailMessage message = new SimpleMailMessage();        
         message.setTo(toEmail);
         message.setSubject(subject);
-        message.setText(body);
+        message.setText(text);
         mailSender.send(message);
         
     }
@@ -48,7 +48,7 @@ public class MailService {
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(html, true);
-        
+        helper.setFrom("LTDreams-Admin");
         mailSender.send(message);
     }
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,20 +21,16 @@ public class MailController {
 	private MailService mailService;
 	
 	@GetMapping("/send-email")
-	public String sendEmail() {
-	    mailService.sendSimpleEmail("jianmin.dai.it@gmail.com", "Test Subject", "Test Body");
+	public String sendEmail(@RequestBody SimpleEmailRequest request) {
+	    mailService.sendSimpleEmail(request.getTo(),request.getSubject(), request.getText());
 	    return "Email sent successfully";
 	}
 
 	@GetMapping("/send-template-email")
-	public String sendTemplateEmail() {
+	public String sendTemplateEmail(@RequestBody TemplateEmailRequest request) {
 		
-		Map<String, Object> model = new HashMap<>();
-		model.put("name", "John Doe");
-		model.put("link", "https://yourwebsite.com/reset-password?token=abc123");
-
 		try {
-			mailService.sendTemplateEmail("jianmin.dai.it2@gmail.com", "Reset Your Password", model, "email-template");
+			mailService.sendTemplateEmail(request.getTo(), request.getSubject(), request.getModel(), request.getTemplate());
 			return "Email sent successfully";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
